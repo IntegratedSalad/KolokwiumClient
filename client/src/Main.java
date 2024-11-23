@@ -2,36 +2,30 @@ import java.io.*;
 import java.net.Socket;
 
 public class Main {
+
+    private static BufferedReader in;
     public static void main(String[] args) {
 
         try {
             Socket clientSocket = new Socket("127.0.0.1", 2137);
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(clientSocket.getInputStream()));
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            Thread.sleep(2000);
-            String buff;
-
-            while ((buff = in.readLine()) != null) {
-                System.out.println(buff);
-            }
-
-            //System.out
-
-            //System.out.println(in.readLine());
-            //System.out.println(new String(cbuff));
-
-            // Jeden watek obsluguje logike odpowiadania na pytania
-            // Drugi watek obsluguje wiadomosci od serwera
+            String resp = GetResponseFromServer();
+            System.out.println(resp);
 
             clientSocket.close();
 
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             System.out.println("Error: " + e);
             System.exit(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
+    }
+
+    public static String GetResponseFromServer() throws IOException, InterruptedException {
+        Thread.sleep(2000);
+        String buff = null;
+        while (in.ready() && (buff = in.readLine()) != null);
+        return buff;
     }
 
 }
