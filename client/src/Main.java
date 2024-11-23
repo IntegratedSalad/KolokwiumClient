@@ -16,9 +16,10 @@ public class Main {
             // Get First Question
 
             // for ...
-            // 1. Read input from Client (uczen odpowiada na pytansko)
-            // 2. Send answer
-            // 3. Get next question (and show the possible answers)
+            // 1. Get Question from server
+            // 2. Read input from Client (uczen odpowiada na pytansko)
+            // 3. Send answer
+            // 4. Get next question (and show the possible answers)
             // loop?
 
             clientSocket.close();
