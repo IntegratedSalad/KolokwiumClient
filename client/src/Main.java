@@ -10,8 +10,17 @@ public class Main {
             Socket clientSocket = new Socket("127.0.0.1", 2137);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            String resp = GetResponseFromServer();
+            String resp = GetResponseFromServer(); // Get Hello
             System.out.println(resp);
+
+            // Get First Question
+
+
+            // for ...
+            // 1. Read input from Client (uczen odpowiada na pytansko)
+            // 2. Send answer
+            // 3. Get next question
+            // loop?
 
             clientSocket.close();
 
@@ -28,4 +37,9 @@ public class Main {
         return buff;
     }
 
+    public static MessageType DecodeResponseFromServer() throws IOException, InterruptedException {
+
+        // Get first character and map it to the MessageType
+        return null;
+    }
 }
