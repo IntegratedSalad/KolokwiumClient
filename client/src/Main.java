@@ -33,7 +33,7 @@ public class Main {
                 String[] answers = GetPossibleAnswersFromResponse(serverResponse);
 
                 for (int i = 0; i < answers.length; i++) {
-                    System.out.println("Possible answer " + i+1 + ": " + answers[i]);
+                    System.out.println("Possible answer " + (i+1) + ": " + answers[i]);
                 }
 
                 System.out.println("Your answer: ");
@@ -53,6 +53,13 @@ public class Main {
                 case '4': {
                     // Quiz completed
                     System.out.println("Zakonczyles test xD");
+
+                    System.out.println("Czekanie na wynik...");
+                    String scoreString = GetResponseFromServer().substring(1);
+                    System.out.println("Wynik: " + scoreString);
+//                    Thread.sleep(3000);
+//                    final String scoreString = GetResponseFromServer().substring(1);
+//                    System.out.println("Wynik: " + scoreString);
                     break;
                 }
                 case '3': {
