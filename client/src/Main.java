@@ -15,6 +15,11 @@ public class Main {
             socIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             socOut = new PrintWriter(clientSocket.getOutputStream());
 
+            System.out.println("Your name?:");
+            String name = stdin.nextLine();
+            socOut.println(name); // TODO: add message type
+            socOut.flush();
+
             System.out.println("Waiting for hello...");
             String resp = GetResponseFromServer(); // Get Hello
             System.out.println(resp);
@@ -37,8 +42,17 @@ public class Main {
                 serverResponse = GetResponseFromServer();
             }
 
-            switch (serverResponse) {
-                // Catch the other message
+            switch (serverResponse.charAt(0)) {
+                case '4': {
+                    // Quiz completed
+                    System.out.println("Zakonczyles test xD");
+                    break;
+                }
+                case '3': {
+                    // Quiz abandoned
+                    System.out.println("Test nie zdany hahahah get shitted!!!1");
+                    break;
+                }
             }
 
             // 1. Get Question from server
@@ -55,10 +69,15 @@ public class Main {
     }
 
     public static String GetResponseFromServer() throws IOException, InterruptedException {
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
         String buff = null;
 //        while (socIn.ready() && (buff = socIn.readLine()) != null);
         while ((buff = socIn.readLine()) == null); // wait if there's nothing
         return buff;
+    }
+
+    public static void SendDataToServer(String data) {
+        socOut.println(data);
+        socOut.flush();
     }
 }
