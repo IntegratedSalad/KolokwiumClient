@@ -29,6 +29,13 @@ public class Main {
             while (serverResponse.charAt(0) == '5') { // if question
 
                 System.out.println("Got question: " + serverResponse);
+                System.out.println("Got answers:");
+                String[] answers = GetPossibleAnswersFromResponse(serverResponse);
+
+                for (int i = 0; i < answers.length; i++) {
+                    System.out.println("Possible answer " + i+1 + ": " + answers[i]);
+                }
+
                 System.out.println("Your answer: ");
                 String uczenAnswer = stdin.nextLine();
                 if (!Objects.equals(uczenAnswer, "")) {
@@ -79,5 +86,10 @@ public class Main {
     public static void SendDataToServer(String data) {
         socOut.println(data);
         socOut.flush();
+    }
+
+    public static String[] GetPossibleAnswersFromResponse(String response) {
+        final int indexOfAns = response.indexOf("ANS");
+        return response.substring(indexOfAns+4).split(" ");
     }
 }
