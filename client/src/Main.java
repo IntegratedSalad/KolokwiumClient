@@ -28,7 +28,7 @@ public class Main {
             String serverResponse = GetResponseFromServer();
             while (serverResponse.charAt(0) == '5') { // if question
 
-                System.out.println("Got question: " + serverResponse);
+                System.out.println("Got question: " + serverResponse.substring(1));
                 System.out.println("Got answers:");
                 String[] answers = GetPossibleAnswersFromResponse(serverResponse);
 
