@@ -9,7 +9,7 @@ public class Main {
 
     private static BufferedReader socIn;
     private static PrintWriter socOut;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner stdin = new Scanner(System.in);
         Timer timer = new Timer();
@@ -23,8 +23,9 @@ public class Main {
             }
         }, 20*1000);
 
+        Socket clientSocket = null;
         try {
-            Socket clientSocket = new Socket("127.0.0.1", 2137);
+            clientSocket = new Socket("127.0.0.1", 2137);
             socIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             socOut = new PrintWriter(clientSocket.getOutputStream());
 
@@ -70,11 +71,13 @@ public class Main {
                     System.out.println("Czekanie na wynik...");
                     String scoreString = GetResponseFromServer().substring(1);
                     System.out.println("Wynik: " + scoreString);
+                    clientSocket.close();
+                    System.exit(1);
                     break;
                 }
                 case '3': {
                     // Quiz abandoned
-                    System.out.println("Test nie zdany hahahah get shitted!!!1");
+                    System.out.println("Test nie zdany hahahah!!!1");
                     break;
                 }
             }
@@ -84,11 +87,14 @@ public class Main {
             // 3. Send answer
             // loop
 
-            clientSocket.close();
 
         } catch (IOException | InterruptedException e) {
             System.out.println("Error: " + e);
             System.exit(1);
+        } finally {
+            if (clientSocket != null) {
+                clientSocket.close();
+            }
         }
     }
 
