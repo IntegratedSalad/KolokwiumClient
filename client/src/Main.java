@@ -70,9 +70,6 @@ public class Main {
                     System.out.println("Czekanie na wynik...");
                     String scoreString = GetResponseFromServer().substring(1);
                     System.out.println("Wynik: " + scoreString);
-//                    Thread.sleep(3000);
-//                    final String scoreString = GetResponseFromServer().substring(1);
-//                    System.out.println("Wynik: " + scoreString);
                     break;
                 }
                 case '3': {
@@ -96,9 +93,7 @@ public class Main {
     }
 
     public static String GetResponseFromServer() throws IOException, InterruptedException {
-//        Thread.sleep(2000);
         String buff = null;
-//        while (socIn.ready() && (buff = socIn.readLine()) != null);
         while ((buff = socIn.readLine()) == null); // wait if there's nothing
         return buff;
     }
