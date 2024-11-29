@@ -2,6 +2,8 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main {
 
@@ -10,6 +12,17 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner stdin = new Scanner(System.in);
+        Timer timer = new Timer();
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Koniec czasu!");
+                System.out.println();
+                System.exit(-1);
+            }
+        }, 20*1000);
+
         try {
             Socket clientSocket = new Socket("127.0.0.1", 2137);
             socIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
